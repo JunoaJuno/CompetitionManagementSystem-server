@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.juno.competitionmanagementsystemserver.mapper.CompetitionInfoMapper">
+  <resultMap id="BaseResultMap" type="com.juno.competitionmanagementsystemserver.model.CompetitionInfo">
+    <!--@mbg.generated-->
+    <!--@Table graduation.competition_info-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="comm_id" jdbcType="INTEGER" property="commId" />
+    <result column="signup_start" jdbcType="TIMESTAMP" property="signupStart" />
+    <result column="signup_end" jdbcType="TIMESTAMP" property="signupEnd" />
+    <result column="works_end" jdbcType="TIMESTAMP" property="worksEnd" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="undertaker" jdbcType="VARCHAR" property="undertaker" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, comm_id, signup_start, signup_end, works_end, `location`, sponsor, undertaker, 
+    `state`, description, create_time, update_time, `level`, `order`
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update graduation.competition_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="comm_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.commId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="signup_start = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.signupStart,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="signup_end = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.signupEnd,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="works_end = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.worksEnd,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="`location` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.location,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="sponsor = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.sponsor,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="undertaker = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.undertaker,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`state` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.state,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.description,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="`level` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.level,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+      <trim prefix="`order` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.order,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update graduation.competition_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.name != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="comm_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commId != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.commId,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="signup_start = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.signupStart != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.signupStart,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="signup_end = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.signupEnd != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.signupEnd,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="works_end = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.worksEnd != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.worksEnd,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`location` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.location != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.location,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="sponsor = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.sponsor != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.sponsor,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="undertaker = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.undertaker != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.undertaker,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`state` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.state != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.state,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.description != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.description,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`level` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.level != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.level,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`order` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.order != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.order,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into graduation.competition_info
+    (`name`, comm_id, signup_start, signup_end, works_end, `location`, sponsor, undertaker, 
+      `state`, description, create_time, update_time, `level`, `order`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name,jdbcType=VARCHAR}, #{item.commId,jdbcType=INTEGER}, #{item.signupStart,jdbcType=TIMESTAMP}, 
+        #{item.signupEnd,jdbcType=TIMESTAMP}, #{item.worksEnd,jdbcType=TIMESTAMP}, #{item.location,jdbcType=VARCHAR}, 
+        #{item.sponsor,jdbcType=VARCHAR}, #{item.undertaker,jdbcType=VARCHAR}, #{item.state,jdbcType=VARCHAR}, 
+        #{item.description,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+        #{item.level,jdbcType=TINYINT}, #{item.order,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.juno.competitionmanagementsystemserver.model.CompetitionInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into graduation.competition_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      `name`,
+      comm_id,
+      signup_start,
+      signup_end,
+      works_end,
+      `location`,
+      sponsor,
+      undertaker,
+      `state`,
+      description,
+      create_time,
+      update_time,
+      `level`,
+      `order`,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{name,jdbcType=VARCHAR},
+      #{commId,jdbcType=INTEGER},
+      #{signupStart,jdbcType=TIMESTAMP},
+      #{signupEnd,jdbcType=TIMESTAMP},
+      #{worksEnd,jdbcType=TIMESTAMP},
+      #{location,jdbcType=VARCHAR},
+      #{sponsor,jdbcType=VARCHAR},
+      #{undertaker,jdbcType=VARCHAR},
+      #{state,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{level,jdbcType=TINYINT},
+      #{order,jdbcType=INTEGER},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      `name` = #{name,jdbcType=VARCHAR},
+      comm_id = #{commId,jdbcType=INTEGER},
+      signup_start = #{signupStart,jdbcType=TIMESTAMP},
+      signup_end = #{signupEnd,jdbcType=TIMESTAMP},
+      works_end = #{worksEnd,jdbcType=TIMESTAMP},
+      `location` = #{location,jdbcType=VARCHAR},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      undertaker = #{undertaker,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      `level` = #{level,jdbcType=TINYINT},
+      `order` = #{order,jdbcType=INTEGER},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.juno.competitionmanagementsystemserver.model.CompetitionInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into graduation.competition_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="commId != null">
+        comm_id,
+      </if>
+      <if test="signupStart != null">
+        signup_start,
+      </if>
+      <if test="signupEnd != null">
+        signup_end,
+      </if>
+      <if test="worksEnd != null">
+        works_end,
+      </if>
+      <if test="location != null">
+        `location`,
+      </if>
+      <if test="sponsor != null">
+        sponsor,
+      </if>
+      <if test="undertaker != null">
+        undertaker,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="order != null">
+        `order`,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="commId != null">
+        #{commId,jdbcType=INTEGER},
+      </if>
+      <if test="signupStart != null">
+        #{signupStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signupEnd != null">
+        #{signupEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="worksEnd != null">
+        #{worksEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null">
+        #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="undertaker != null">
+        #{undertaker,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="commId != null">
+        comm_id = #{commId,jdbcType=INTEGER},
+      </if>
+      <if test="signupStart != null">
+        signup_start = #{signupStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signupEnd != null">
+        signup_end = #{signupEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="worksEnd != null">
+        works_end = #{worksEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null">
+        `location` = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="sponsor != null">
+        sponsor = #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="undertaker != null">
+        undertaker = #{undertaker,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="order != null">
+        `order` = #{order,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
