@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.juno.competitionmanagementsystemserver.mapper.WorkInfoMapper">
+  <resultMap id="BaseResultMap" type="com.juno.competitionmanagementsystemserver.model.WorkInfo">
+    <!--@mbg.generated-->
+    <!--@Table graduation.work_info-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="work_name" jdbcType="VARCHAR" property="workName" />
+    <result column="is_review_pass" jdbcType="TINYINT" property="isReviewPass" />
+    <result column="work_url" jdbcType="VARCHAR" property="workUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.juno.competitionmanagementsystemserver.model.WorkInfo">
+    <!--@mbg.generated-->
+    <!--@Table graduation.work_info-->
+    <result column="review_notes" jdbcType="LONGVARCHAR" property="reviewNotes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, work_name, is_review_pass, work_url, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--@mbg.generated-->
+    review_notes
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update graduation.work_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="work_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.workName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="is_review_pass = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.isReviewPass,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+      <trim prefix="work_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.workUrl,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="review_notes = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.reviewNotes,jdbcType=LONGVARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update graduation.work_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="work_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.workName != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.workName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_review_pass = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isReviewPass != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.isReviewPass,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="work_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.workUrl != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.workUrl,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="review_notes = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.reviewNotes != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.reviewNotes,jdbcType=LONGVARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into graduation.work_info
+    (id, work_name, is_review_pass, work_url, create_time, update_time, review_notes)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.workName,jdbcType=VARCHAR}, #{item.isReviewPass,jdbcType=TINYINT}, 
+        #{item.workUrl,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+        #{item.reviewNotes,jdbcType=LONGVARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.juno.competitionmanagementsystemserver.model.WorkInfo">
+    <!--@mbg.generated-->
+    insert into graduation.work_info
+    (id, work_name, is_review_pass, work_url, create_time, update_time)
+    values
+    (#{id,jdbcType=INTEGER}, #{workName,jdbcType=VARCHAR}, #{isReviewPass,jdbcType=TINYINT}, 
+      #{workUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+    on duplicate key update 
+    id = #{id,jdbcType=INTEGER}, 
+    work_name = #{workName,jdbcType=VARCHAR}, 
+    is_review_pass = #{isReviewPass,jdbcType=TINYINT}, 
+    work_url = #{workUrl,jdbcType=VARCHAR}, 
+    create_time = #{createTime,jdbcType=TIMESTAMP}, 
+    update_time = #{updateTime,jdbcType=TIMESTAMP}
+  </insert>
+  <insert id="insertOrUpdateWithBLOBs" parameterType="com.juno.competitionmanagementsystemserver.model.WorkInfo">
+    <!--@mbg.generated-->
+    insert into graduation.work_info
+    (id, work_name, is_review_pass, work_url, create_time, update_time, review_notes)
+    values
+    (#{id,jdbcType=INTEGER}, #{workName,jdbcType=VARCHAR}, #{isReviewPass,jdbcType=TINYINT}, 
+      #{workUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{reviewNotes,jdbcType=LONGVARCHAR})
+    on duplicate key update 
+    id = #{id,jdbcType=INTEGER}, 
+    work_name = #{workName,jdbcType=VARCHAR}, 
+    is_review_pass = #{isReviewPass,jdbcType=TINYINT}, 
+    work_url = #{workUrl,jdbcType=VARCHAR}, 
+    create_time = #{createTime,jdbcType=TIMESTAMP}, 
+    update_time = #{updateTime,jdbcType=TIMESTAMP}, 
+    review_notes = #{reviewNotes,jdbcType=LONGVARCHAR}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.juno.competitionmanagementsystemserver.model.WorkInfo">
+    <!--@mbg.generated-->
+    insert into graduation.work_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="workName != null">
+        work_name,
+      </if>
+      <if test="isReviewPass != null">
+        is_review_pass,
+      </if>
+      <if test="workUrl != null">
+        work_url,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="reviewNotes != null">
+        review_notes,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="workName != null">
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="isReviewPass != null">
+        #{isReviewPass,jdbcType=TINYINT},
+      </if>
+      <if test="workUrl != null">
+        #{workUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewNotes != null">
+        #{reviewNotes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="workName != null">
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="isReviewPass != null">
+        is_review_pass = #{isReviewPass,jdbcType=TINYINT},
+      </if>
+      <if test="workUrl != null">
+        work_url = #{workUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewNotes != null">
+        review_notes = #{reviewNotes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

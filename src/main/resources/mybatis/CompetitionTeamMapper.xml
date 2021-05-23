@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.juno.competitionmanagementsystemserver.mapper.CompetitionTeamMapper">
+  <resultMap id="BaseResultMap" type="com.juno.competitionmanagementsystemserver.model.CompetitionTeam">
+    <!--@mbg.generated-->
+    <!--@Table graduation.competition_team-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="is_personal_competition" jdbcType="BOOLEAN" property="isPersonalCompetition" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="competition_id" jdbcType="INTEGER" property="competitionId" />
+    <result column="is_registration_review_pass" jdbcType="TINYINT" property="isRegistrationReviewPass" />
+    <result column="race_track_id" jdbcType="TINYINT" property="raceTrackId" />
+    <result column="work_id" jdbcType="INTEGER" property="workId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, `number`, is_personal_competition, create_time, update_time, `comment`, 
+    competition_id, is_registration_review_pass, race_track_id, work_id
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update graduation.competition_team
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`number` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.number,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="is_personal_competition = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.isPersonalCompetition,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="`comment` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.comment,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="competition_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.competitionId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="is_registration_review_pass = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.isRegistrationReviewPass,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+      <trim prefix="race_track_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.raceTrackId,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+      <trim prefix="work_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.workId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update graduation.competition_team
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.name != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`number` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.number != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.number,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_personal_competition = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isPersonalCompetition != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.isPersonalCompetition,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`comment` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.comment != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.comment,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="competition_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.competitionId != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.competitionId,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_registration_review_pass = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isRegistrationReviewPass != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.isRegistrationReviewPass,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="race_track_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.raceTrackId != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.raceTrackId,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="work_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.workId != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.workId,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into graduation.competition_team
+    (`name`, `number`, is_personal_competition, create_time, update_time, `comment`, 
+      competition_id, is_registration_review_pass, race_track_id, work_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name,jdbcType=VARCHAR}, #{item.number,jdbcType=INTEGER}, #{item.isPersonalCompetition,jdbcType=BOOLEAN}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.comment,jdbcType=VARCHAR}, 
+        #{item.competitionId,jdbcType=INTEGER}, #{item.isRegistrationReviewPass,jdbcType=TINYINT}, 
+        #{item.raceTrackId,jdbcType=TINYINT}, #{item.workId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.juno.competitionmanagementsystemserver.model.CompetitionTeam" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into graduation.competition_team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      `name`,
+      `number`,
+      is_personal_competition,
+      create_time,
+      update_time,
+      `comment`,
+      competition_id,
+      is_registration_review_pass,
+      race_track_id,
+      work_id,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{name,jdbcType=VARCHAR},
+      #{number,jdbcType=INTEGER},
+      #{isPersonalCompetition,jdbcType=BOOLEAN},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
+      #{comment,jdbcType=VARCHAR},
+      #{competitionId,jdbcType=INTEGER},
+      #{isRegistrationReviewPass,jdbcType=TINYINT},
+      #{raceTrackId,jdbcType=TINYINT},
+      #{workId,jdbcType=INTEGER},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      `name` = #{name,jdbcType=VARCHAR},
+      `number` = #{number,jdbcType=INTEGER},
+      is_personal_competition = #{isPersonalCompetition,jdbcType=BOOLEAN},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      competition_id = #{competitionId,jdbcType=INTEGER},
+      is_registration_review_pass = #{isRegistrationReviewPass,jdbcType=TINYINT},
+      race_track_id = #{raceTrackId,jdbcType=TINYINT},
+      work_id = #{workId,jdbcType=INTEGER},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.juno.competitionmanagementsystemserver.model.CompetitionTeam" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into graduation.competition_team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="isPersonalCompetition != null">
+        is_personal_competition,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="comment != null">
+        `comment`,
+      </if>
+      <if test="competitionId != null">
+        competition_id,
+      </if>
+      <if test="isRegistrationReviewPass != null">
+        is_registration_review_pass,
+      </if>
+      <if test="raceTrackId != null">
+        race_track_id,
+      </if>
+      <if test="workId != null">
+        work_id,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="isPersonalCompetition != null">
+        #{isPersonalCompetition,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="competitionId != null">
+        #{competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="isRegistrationReviewPass != null">
+        #{isRegistrationReviewPass,jdbcType=TINYINT},
+      </if>
+      <if test="raceTrackId != null">
+        #{raceTrackId,jdbcType=TINYINT},
+      </if>
+      <if test="workId != null">
+        #{workId,jdbcType=INTEGER},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="isPersonalCompetition != null">
+        is_personal_competition = #{isPersonalCompetition,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="competitionId != null">
+        competition_id = #{competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="isRegistrationReviewPass != null">
+        is_registration_review_pass = #{isRegistrationReviewPass,jdbcType=TINYINT},
+      </if>
+      <if test="raceTrackId != null">
+        race_track_id = #{raceTrackId,jdbcType=TINYINT},
+      </if>
+      <if test="workId != null">
+        work_id = #{workId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
