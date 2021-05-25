@@ -12,7 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 @EnableOpenApi
-public class Swagger {
+public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("竞赛管理系统api文档")
@@ -23,7 +23,7 @@ public class Swagger {
 
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.juno.competitionmanagementsystemserver"))

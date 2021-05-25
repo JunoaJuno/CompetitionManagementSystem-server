@@ -1,33 +1,38 @@
 package com.juno.competitionmanagementsystemserver.service;
 
+import com.juno.competitionmanagementsystemserver.dto.CompetitionMasterDto;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import java.util.List;
 import com.juno.competitionmanagementsystemserver.model.CompetitionMasterInfo;
 import com.juno.competitionmanagementsystemserver.mapper.CompetitionMasterInfoMapper;
 @Service
 public class CompetitionMasterInfoService extends ServiceImpl<CompetitionMasterInfoMapper, CompetitionMasterInfo> {
 
-    
-    public int updateBatch(List<CompetitionMasterInfo> list) {
-        return baseMapper.updateBatch(list);
+    public boolean addNewCompMaster(CompetitionMasterDto dto){
+        CompetitionMasterInfo competitionMasterInfo = new CompetitionMasterInfo();
+        competitionMasterInfo.setName(dto.getName());
+        competitionMasterInfo.setType(dto.getType());
+        competitionMasterInfo.setRaceTrack(dto.getRaceTrack());
+        competitionMasterInfo.setDescription(dto.getDescription());
+        competitionMasterInfo.setYear(dto.getYear());
+        return save(competitionMasterInfo);
     }
-    
-    public int updateBatchSelective(List<CompetitionMasterInfo> list) {
-        return baseMapper.updateBatchSelective(list);
+
+    public boolean updateById(Integer id, CompetitionMasterDto dto) {
+        CompetitionMasterInfo competitionMasterInfo = new CompetitionMasterInfo();
+        competitionMasterInfo.setId(id);
+        competitionMasterInfo.setName(dto.getName());
+        competitionMasterInfo.setType(dto.getType());
+        competitionMasterInfo.setRaceTrack(dto.getRaceTrack());
+        competitionMasterInfo.setDescription(dto.getDescription());
+        competitionMasterInfo.setYear(dto.getYear());
+        return updateById(competitionMasterInfo);
     }
-    
-    public int batchInsert(List<CompetitionMasterInfo> list) {
-        return baseMapper.batchInsert(list);
-    }
-    
-    public int insertOrUpdate(CompetitionMasterInfo record) {
-        return baseMapper.insertOrUpdate(record);
-    }
-    
-    public int insertOrUpdateSelective(CompetitionMasterInfo record) {
-        return baseMapper.insertOrUpdateSelective(record);
+
+    public boolean has(Integer id) {
+        CompetitionMasterInfo competitionMasterInfo = getById(id);
+        return competitionMasterInfo != null;
     }
 }

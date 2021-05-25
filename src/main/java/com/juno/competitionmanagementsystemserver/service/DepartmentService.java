@@ -1,33 +1,32 @@
 package com.juno.competitionmanagementsystemserver.service;
 
+import com.juno.competitionmanagementsystemserver.dto.DepartmentDto;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import java.util.List;
 import com.juno.competitionmanagementsystemserver.mapper.DepartmentMapper;
 import com.juno.competitionmanagementsystemserver.model.Department;
 @Service
 public class DepartmentService extends ServiceImpl<DepartmentMapper, Department> {
 
-    
-    public int updateBatch(List<Department> list) {
-        return baseMapper.updateBatch(list);
+    public boolean updateById(Integer id, DepartmentDto departmentDto) {
+        Department department = new Department();
+        department.setId(id);
+        department.setName(departmentDto.getName());
+        department.setNumber(departmentDto.getNumber());
+        return updateById(department);
     }
-    
-    public int updateBatchSelective(List<Department> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-    
-    public int batchInsert(List<Department> list) {
-        return baseMapper.batchInsert(list);
-    }
-    
-    public int insertOrUpdate(Department record) {
-        return baseMapper.insertOrUpdate(record);
-    }
-    
-    public int insertOrUpdateSelective(Department record) {
-        return baseMapper.insertOrUpdateSelective(record);
+
+    public boolean saveBatch(List<DepartmentDto> departmentDtoList) {
+        List<Department> departmentList = new LinkedList<>();
+        for (DepartmentDto departmentDto : departmentDtoList) {
+            Department department = new Department();
+            department.setNumber(departmentDto.getNumber());
+            department.setName(departmentDto.getName());
+            departmentList.add(department);
+        }
+        return saveBatch(departmentList);
     }
 }
