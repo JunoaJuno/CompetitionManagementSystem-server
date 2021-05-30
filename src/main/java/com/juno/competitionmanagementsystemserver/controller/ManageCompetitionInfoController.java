@@ -4,7 +4,6 @@ package com.juno.competitionmanagementsystemserver.controller;
 import com.juno.competitionmanagementsystemserver.dto.CompetitionSlaveDto;
 import com.juno.competitionmanagementsystemserver.dto.ResponseStruct;
 import com.juno.competitionmanagementsystemserver.model.CompetitionInfo;
-import com.juno.competitionmanagementsystemserver.model.CompetitionMasterInfo;
 import com.juno.competitionmanagementsystemserver.service.CompetitionInfoService;
 import com.juno.competitionmanagementsystemserver.service.CompetitionMasterInfoService;
 import io.swagger.annotations.Api;
@@ -29,7 +28,8 @@ public class ManageCompetitionInfoController {
     private final CompetitionInfoService competitionInfoService;
     private final CompetitionMasterInfoService competitionMasterInfoService;
 
-    public ManageCompetitionInfoController(CompetitionInfoService competitionInfoService, CompetitionMasterInfoService competitionMasterInfoService) {
+    public ManageCompetitionInfoController(CompetitionInfoService competitionInfoService,
+                                           CompetitionMasterInfoService competitionMasterInfoService) {
         this.competitionMasterInfoService = competitionMasterInfoService;
         this.competitionInfoService = competitionInfoService;
     }
@@ -51,7 +51,7 @@ public class ManageCompetitionInfoController {
             } else {
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("failed", ""));
             }
-        }else {
+        } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseStruct<>("master id 不存在", ""));
         }
     }
@@ -87,7 +87,7 @@ public class ManageCompetitionInfoController {
                                                                         @PathVariable
                                                                                 Integer id,
                                                                         @RequestBody
-                                                                        CompetitionSlaveDto competitionSlaveDto) {
+                                                                                CompetitionSlaveDto competitionSlaveDto) {
         if (competitionInfoService.updateById(id, competitionSlaveDto)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseStruct<>("ok", ""));
         } else {
@@ -104,7 +104,7 @@ public class ManageCompetitionInfoController {
                                                                      Integer id) {
         if (competitionInfoService.removeById(id)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseStruct<>("ok", ""));
-        }else {
+        } else {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("failed", ""));
         }
     }

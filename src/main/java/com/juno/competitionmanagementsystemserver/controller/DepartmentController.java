@@ -45,7 +45,7 @@ public class DepartmentController {
                                                                            Integer id,
                                                                    @RequestBody
                                                                            DepartmentDto departmentDto
-                                                                    ) {
+    ) {
         if (departmentService.updateById(id, departmentDto)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseStruct<>("ok", ""));
         } else {
@@ -59,7 +59,7 @@ public class DepartmentController {
     public ResponseEntity<ResponseStruct<String>> addDepartment(@NotEmpty
                                                                 @Size(min = 1)
                                                                 @RequestBody
-                                                                List<DepartmentDto> departmentDtoList) {
+                                                                        List<DepartmentDto> departmentDtoList) {
         if (departmentService.saveBatch(departmentDtoList)) {
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseStruct<>("ok", ""));
         } else {
@@ -76,7 +76,7 @@ public class DepartmentController {
                                                                            Integer id) {
         if (departmentService.removeById(id)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseStruct<>("ok", ""));
-        }else {
+        } else {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("failed", ""));
         }
     }

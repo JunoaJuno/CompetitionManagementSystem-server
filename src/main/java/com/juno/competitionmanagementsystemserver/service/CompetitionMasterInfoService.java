@@ -1,16 +1,17 @@
 package com.juno.competitionmanagementsystemserver.service;
 
-import com.juno.competitionmanagementsystemserver.dto.CompetitionMasterDto;
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.juno.competitionmanagementsystemserver.model.CompetitionMasterInfo;
+import com.juno.competitionmanagementsystemserver.dto.CompetitionMasterDto;
 import com.juno.competitionmanagementsystemserver.mapper.CompetitionMasterInfoMapper;
+import com.juno.competitionmanagementsystemserver.model.CompetitionMasterInfo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
+@Transactional
 public class CompetitionMasterInfoService extends ServiceImpl<CompetitionMasterInfoMapper, CompetitionMasterInfo> {
 
-    public boolean addNewCompMaster(CompetitionMasterDto dto){
+    public boolean addNewCompMaster(CompetitionMasterDto dto) {
         CompetitionMasterInfo competitionMasterInfo = new CompetitionMasterInfo();
         competitionMasterInfo.setName(dto.getName());
         competitionMasterInfo.setType(dto.getType());

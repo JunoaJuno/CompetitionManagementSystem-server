@@ -2,12 +2,12 @@ package com.juno.competitionmanagementsystemserver.service;
 
 import com.juno.competitionmanagementsystemserver.model.AuthUserDetails;
 import com.juno.competitionmanagementsystemserver.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 
 @Component
 public class UserDetailsServiceCustomize implements UserDetailsService {
@@ -21,7 +21,8 @@ public class UserDetailsServiceCustomize implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("用户名不存在");
         } else {
-            return new AuthUserDetails(user.getNickname(),user.getPassword(), user.getId(), user.getManageId().toString());
+            return new AuthUserDetails(user.getNickname(), user.getPassword(), user.getId(),
+                    user.getManageId().toString());
         }
     }
 }

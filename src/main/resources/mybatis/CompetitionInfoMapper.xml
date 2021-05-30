@@ -19,10 +19,12 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="level" jdbcType="TINYINT" property="level" />
     <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="team_number" jdbcType="INTEGER" property="teamNumber" />
+    <result column="is_personal_competition" jdbcType="BOOLEAN" property="isPersonalCompetition" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, `name`, comm_id, signup_start, signup_end, works_end, `location`, sponsor, undertaker, 
-    `state`, description, create_time, update_time, `level`, `order`
+    `state`, description, create_time, update_time, `level`, `order`, team_number, is_personal_competition
   </sql>
 </mapper>

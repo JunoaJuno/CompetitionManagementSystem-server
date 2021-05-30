@@ -26,27 +26,31 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("auth:"+request.getRequestURI());
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
+        System.out.println("auth:" + request.getRequestURI());
         final String header = "Authorization";
 //        @Valid
 //        @NotBlank(message = "请求头错误")
 //        @Size(min = 9, message = "token参数错误")
 //        @Pattern(regexp = "^(Bearer ).*")
         String requestTokenHeader = request.getHeader(header);
-        if (requestTokenHeader != null){
+        if (requestTokenHeader != null) {
             String jwtToken = requestTokenHeader.substring(7);
             try {
                 DecodedJWT payload = JwtUtils.verifyToken(jwtToken);
                 if (payload != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                    AuthUserDetails userDetails = this.userDetailsService.loadUserByUsername(String.valueOf(payload.getClaim("userId").asInt()));
+                    AuthUserDetails userDetails =
+                            this.userDetailsService.loadUserByUsername(String.valueOf(payload.getClaim("userId").asInt()));
                     userDetails.setExpiresAt(payload.getExpiresAt());
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, payload, userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(userDetails, payload, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (Exception e) {
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(null, null, null);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(null,
+                        null, null);
                 authentication.setAuthenticated(false);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 System.out.println("token 验证失败");

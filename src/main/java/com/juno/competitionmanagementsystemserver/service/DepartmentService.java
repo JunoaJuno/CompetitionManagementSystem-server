@@ -1,14 +1,17 @@
 package com.juno.competitionmanagementsystemserver.service;
 
-import com.juno.competitionmanagementsystemserver.dto.DepartmentDto;
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.LinkedList;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.juno.competitionmanagementsystemserver.dto.DepartmentDto;
 import com.juno.competitionmanagementsystemserver.mapper.DepartmentMapper;
 import com.juno.competitionmanagementsystemserver.model.Department;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+
 @Service
+@Transactional
 public class DepartmentService extends ServiceImpl<DepartmentMapper, Department> {
 
     public boolean updateById(Integer id, DepartmentDto departmentDto) {

@@ -13,29 +13,17 @@ public class AuthUserDetails implements UserDetails {
     private final String password;
 
     private final Integer userId;
-
-    private Integer tokenId;
-
     private final String role;
-
-    private Date expiresAt;
-
     private final Collection<? extends GrantedAuthority> authorities;
+    private Integer tokenId;
+    private Date expiresAt;
 
     public AuthUserDetails(String username, String password, Integer userId, String role) {
         this.username = username;
         this.password = password;
         this.userId = userId;
         this.role = role;
-        this.authorities =  AuthorityUtils.commaSeparatedStringToAuthorityList(this.getRole());
-    }
-
-    public void setExpiresAt(Date expiresAt) {
-        this.expiresAt = expiresAt;
-    }
-
-    public void setTokenId(Integer tokenId) {
-        this.tokenId = tokenId;
+        this.authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(this.getRole());
     }
 
     public Integer getUserId() {
@@ -46,12 +34,20 @@ public class AuthUserDetails implements UserDetails {
         return tokenId;
     }
 
+    public void setTokenId(Integer tokenId) {
+        this.tokenId = tokenId;
+    }
+
     public String getRole() {
         return role;
     }
 
     public Date getExpiresAt() {
         return expiresAt;
+    }
+
+    public void setExpiresAt(Date expiresAt) {
+        this.expiresAt = expiresAt;
     }
 
     @Override

@@ -44,11 +44,14 @@ public class ManageCompetitionMasterController {
     @GetMapping(value = "list")
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<Page<CompetitionMasterInfo>>> getMasterCompetitionList(@Digits(integer = 4, fraction = 0, message = "填数字")
+    public ResponseEntity<ResponseStruct<Page<CompetitionMasterInfo>>> getMasterCompetitionList(@Digits(integer = 4,
+            fraction = 0, message = "填数字")
                                                                                                 @Positive
                                                                                                 @RequestParam
                                                                                                         Integer current,
-                                                                                                @Digits(integer = 4, fraction = 0, message = "填数字")
+                                                                                                @Digits(integer = 4,
+                                                                                                        fraction = 0,
+                                                                                                        message = "填数字")
                                                                                                 @Positive
                                                                                                 @RequestParam
                                                                                                         Integer size) {
@@ -60,7 +63,8 @@ public class ManageCompetitionMasterController {
     @PostMapping(value = "{id}")
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<String>> changeMasterCompetition(@Digits(integer = 10, fraction = 0, message = "必须为数字")
+    public ResponseEntity<ResponseStruct<String>> changeMasterCompetition(@Digits(integer = 10, fraction = 0,
+            message = "必须为数字")
                                                                           @Positive
                                                                           @PathVariable Integer id,
                                                                           @RequestBody CompetitionMasterDto comMatDto) {
@@ -74,7 +78,8 @@ public class ManageCompetitionMasterController {
     @DeleteMapping(value = "{id}")
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<String>> deleteMasterCompetition(@Digits(integer = 10, fraction = 0, message = "必须为数字")
+    public ResponseEntity<ResponseStruct<String>> deleteMasterCompetition(@Digits(integer = 10, fraction = 0,
+            message = "必须为数字")
                                                                           @Positive
                                                                           @PathVariable Integer id) {
         if (competitionMasterInfoService.removeById(id)) {

@@ -6,8 +6,6 @@
     <!--@Table graduation.competition_team-->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="number" jdbcType="INTEGER" property="number" />
-    <result column="is_personal_competition" jdbcType="BOOLEAN" property="isPersonalCompetition" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
@@ -18,7 +16,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `name`, `number`, is_personal_competition, create_time, update_time, `comment`, 
-    competition_id, is_registration_review_pass, race_track_id, work_id
+    id, `name`, create_time, update_time, `comment`, competition_id, is_registration_review_pass, 
+    race_track_id, work_id
   </sql>
 </mapper>
