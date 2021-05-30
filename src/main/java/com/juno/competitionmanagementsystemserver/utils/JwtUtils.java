@@ -14,6 +14,7 @@ import java.util.Date;
 public class JwtUtils {
     /**
      * 加密密码
+     *
      * @param {String} password
      * @return {String} result
      */
@@ -35,23 +36,25 @@ public class JwtUtils {
 
     /**
      * 创建 Token 串
+     *
      * @param {tokenPayload} payload
      */
     public static String getToken(User user, Tokens token) {
         return JWT.create()
-                .withClaim("userId",user.getId())
-                .withClaim("tokenId",token.getId())
-                .withClaim("role",user.getManageId())
-                .withExpiresAt(new Date(System.currentTimeMillis()+ 3600 * 24 * 14))
+                .withClaim("userId", user.getId())
+                .withClaim("tokenId", token.getId())
+                .withClaim("role", user.getManageId())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 24 * 14))
                 .sign(Algorithm.HMAC256("99bd68c7-1da2-4cfc-809b-d1661e96579d"));
     }
 
     /**
      * 解析 Token
+     *
      * @param {tokenPayload} token
      */
-    public static DecodedJWT verifyToken(String token) throws JWTVerificationException,IllegalArgumentException {
-            JWTVerifier verifier = JWT.require(Algorithm.HMAC256("99bd68c7-1da2-4cfc-809b-d1661e96579d")).build();
-            return verifier.verify(token);
+    public static DecodedJWT verifyToken(String token) throws JWTVerificationException, IllegalArgumentException {
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC256("99bd68c7-1da2-4cfc-809b-d1661e96579d")).build();
+        return verifier.verify(token);
     }
 }

@@ -1,17 +1,18 @@
 package com.juno.competitionmanagementsystemserver.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.juno.competitionmanagementsystemserver.dto.CompetitionSlaveDto;
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.juno.competitionmanagementsystemserver.dto.CompetitionSlaveDto;
 import com.juno.competitionmanagementsystemserver.mapper.CompetitionInfoMapper;
 import com.juno.competitionmanagementsystemserver.model.CompetitionInfo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+
 @Service
+@Transactional
 public class CompetitionInfoService extends ServiceImpl<CompetitionInfoMapper, CompetitionInfo> {
 
     public boolean saveBatch(Integer masterId, List<CompetitionSlaveDto> competitionSlaveDtoList) {
@@ -28,7 +29,7 @@ public class CompetitionInfoService extends ServiceImpl<CompetitionInfoMapper, C
             competitionInfo.setLevel(competitionSlaveDtoList.get(i).getLevel());
             competitionInfo.setLocation(competitionSlaveDtoList.get(i).getLocation());
             competitionInfo.setName(competitionSlaveDtoList.get(i).getName());
-            competitionInfo.setOrder( indexStart + i );
+            competitionInfo.setOrder(indexStart + i);
             competitionInfo.setSignupEnd(competitionSlaveDtoList.get(i).getSignupEnd());
             competitionInfo.setSignupStart(competitionSlaveDtoList.get(i).getSignupStart());
             competitionInfo.setSponsor(competitionSlaveDtoList.get(i).getSponsor());
@@ -42,7 +43,7 @@ public class CompetitionInfoService extends ServiceImpl<CompetitionInfoMapper, C
 
     public List<CompetitionInfo> getByMasterId(Integer masterId) {
         QueryWrapper<CompetitionInfo> competitionInfoQueryWrapper = new QueryWrapper<>();
-        competitionInfoQueryWrapper.eq("comm_id", masterId).orderByAsc("`order`");
+        competitionInfoQueryWrapper.eq(CompetitionInfo.COL_COMM_ID, masterId).orderByAsc("`order`");
         return list(competitionInfoQueryWrapper);
     }
 
@@ -62,3 +63,4 @@ public class CompetitionInfoService extends ServiceImpl<CompetitionInfoMapper, C
         return updateById(competitionInfo);
     }
 }
+

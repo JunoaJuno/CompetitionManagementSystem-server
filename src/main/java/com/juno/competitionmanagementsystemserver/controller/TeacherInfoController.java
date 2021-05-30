@@ -3,9 +3,9 @@ package com.juno.competitionmanagementsystemserver.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.juno.competitionmanagementsystemserver.dto.ResponseStruct;
-import com.juno.competitionmanagementsystemserver.dto.StudentInfoDto;
-import com.juno.competitionmanagementsystemserver.model.StudentInfo;
-import com.juno.competitionmanagementsystemserver.service.StudentInfoService;
+import com.juno.competitionmanagementsystemserver.dto.TeacherInfoDto;
+import com.juno.competitionmanagementsystemserver.model.TeacherInfo;
+import com.juno.competitionmanagementsystemserver.service.TeacherInfoService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,23 +18,23 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
-@Api(tags = "学生信息")
+@Api(tags = "教师信息")
 @Controller
 @CrossOrigin
-@RequestMapping(value = {"/api/v1/student/info"})
-public class StudentInfoController {
+@RequestMapping(value = {"/api/v1/teacher/info"})
+public class TeacherInfoController {
 
-    private final StudentInfoService studentInfoService;
+    private final TeacherInfoService teacherInfoService;
 
-    public StudentInfoController(StudentInfoService studentInfoService) {
-        this.studentInfoService = studentInfoService;
+    public TeacherInfoController(TeacherInfoService teacherInfoService) {
+        this.teacherInfoService = teacherInfoService;
     }
 
     @PutMapping()
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<String>> addStudentInfo(@RequestBody StudentInfoDto studentInfoDto) {
-        if (studentInfoService.save(studentInfoDto)) {
+    public ResponseEntity<ResponseStruct<String>> addTeacherInfo(@RequestBody TeacherInfoDto teacherInfoDto) {
+        if (teacherInfoService.save(teacherInfoDto)) {
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseStruct<>("ok", ""));
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("failed", ""));
@@ -44,8 +44,8 @@ public class StudentInfoController {
     @PostMapping()
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<String>> changeStudentInfo(@RequestBody StudentInfoDto studentInfoDto) {
-        if (studentInfoService.updateById(studentInfoDto)) {
+    public ResponseEntity<ResponseStruct<String>> changeTeacherInfo(@RequestBody TeacherInfoDto teacherInfoDto) {
+        if (teacherInfoService.updateById(teacherInfoDto)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseStruct<>("ok", ""));
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("failed", ""));
@@ -55,11 +55,11 @@ public class StudentInfoController {
     @DeleteMapping(value = "{id}")
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<String>> deleteStudentInfo(@Digits(integer = 10, fraction = 0)
+    public ResponseEntity<ResponseStruct<String>> deleteTeacherInfo(@Digits(integer = 10, fraction = 0)
                                                                     @Positive
                                                                     @PathVariable
                                                                             Integer id) {
-        if (studentInfoService.removeById(id)) {
+        if (teacherInfoService.removeById(id)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseStruct<>("ok", ""));
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("failed", ""));
@@ -69,18 +69,18 @@ public class StudentInfoController {
     @GetMapping(value = "{id}")
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<StudentInfo>> getStudentInfo(@Digits(integer = 10, fraction = 0)
+    public ResponseEntity<ResponseStruct<TeacherInfo>> getTeacherInfo(@Digits(integer = 10, fraction = 0)
                                                                       @Positive
                                                                       @PathVariable
                                                                               Integer id) {
-        StudentInfo studentInfo = studentInfoService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("ok", studentInfo));
+        TeacherInfo teacherInfo = teacherInfoService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("ok", teacherInfo));
     }
 
     @GetMapping(value = "/list")
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<Page<StudentInfo>>> getStudentInfoList(@Digits(integer = 4, fraction = 0,
+    public ResponseEntity<ResponseStruct<Page<TeacherInfo>>> getTeacherInfoList(@Digits(integer = 4, fraction = 0,
             message = "填数字")
                                                                                 @Positive
                                                                                 @RequestParam
@@ -90,20 +90,19 @@ public class StudentInfoController {
                                                                                 @Positive
                                                                                 @RequestParam
                                                                                         Integer size) {
-        Page<StudentInfo> page = new Page<>(current, size, false);
-        Page<StudentInfo> studentInfoPage = studentInfoService.page(page);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("ok", studentInfoPage));
+        Page<TeacherInfo> page = new Page<>(current, size, false);
+        Page<TeacherInfo> teacherInfoPage = teacherInfoService.page(page);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("ok", teacherInfoPage));
     }
 
     @GetMapping(value = "/fuzzy/{value}")
     @ResponseBody
     @Valid
-    public ResponseEntity<ResponseStruct<List<StudentInfo>>> getStudentInfoByFuzzyId(@NotBlank
+    public ResponseEntity<ResponseStruct<List<TeacherInfo>>> getStudentInfoByFuzzyId(@NotBlank
                                                                                      @PathVariable
                                                                                              String value) {
-
-        List<StudentInfo> studentInfoList =
-                studentInfoService.list(new QueryWrapper<StudentInfo>().like(StudentInfo.COL_ID, value).or().like(StudentInfo.COL_NAME, value));
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("ok", studentInfoList));
+        List<TeacherInfo> teacherInfoList =
+                teacherInfoService.list(new QueryWrapper<TeacherInfo>().like(TeacherInfo.COL_ID, value).or().like(TeacherInfo.COL_NAME, value));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseStruct<>("ok", teacherInfoList));
     }
 }

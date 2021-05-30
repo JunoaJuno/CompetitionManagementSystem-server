@@ -21,14 +21,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter, @Qualifier("userDetailsServiceCustomize") UserDetailsService userDetailsService) {
+    public SecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter,
+                          @Qualifier("userDetailsServiceCustomize") UserDetailsService userDetailsService) {
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
         this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService( userDetailsService ).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
