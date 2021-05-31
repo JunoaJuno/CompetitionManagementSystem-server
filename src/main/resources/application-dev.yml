@@ -8,6 +8,7 @@ spring:
     host: 127.0.0.1
     port: 6379
     timeout: 10000
+    database: 0
 
   datasource:
     url: jdbc:mysql://167.179.68.29:3306/graduation?useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowMultiQueries=true
@@ -42,3 +43,12 @@ spring:
 mybatis-plus:
   mapperLocations: ["classpath:mybatis/*Mapper.xml"]
   type-aliases-package: com.juno.competitionmanagementsystemserver.model
+
+
+wx:
+  officialAccounts:
+    appid: wxac73ee595fe8d329
+    secret: be10cbf289c8c2f8dedeaecbc7708872
+  miniProgram:
+    appid: wxd925b7187fb0a88b
+    secret: 759d8181f4a67484851ade816ca3a380
