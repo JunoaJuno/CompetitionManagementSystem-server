@@ -1,10 +1,13 @@
 package com.juno.competitionmanagementsystemserver.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.juno.competitionmanagementsystemserver.dto.CompetitionTeamDto;
 import com.juno.competitionmanagementsystemserver.dto.CompetitionTeamInfoDto;
 import com.juno.competitionmanagementsystemserver.dto.ResponseStruct;
 import com.juno.competitionmanagementsystemserver.model.CompetitionInfo;
 import com.juno.competitionmanagementsystemserver.model.CompetitionTeam;
+import com.juno.competitionmanagementsystemserver.model.TeamStu;
+import com.juno.competitionmanagementsystemserver.model.TeamTea;
 import com.juno.competitionmanagementsystemserver.service.CompetitionInfoService;
 import com.juno.competitionmanagementsystemserver.service.CompetitionTeamService;
 import com.juno.competitionmanagementsystemserver.service.TeamStuService;
@@ -20,6 +23,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import java.util.LinkedList;
 import java.util.List;
 
 @Api(tags = "队伍管理")
@@ -88,14 +92,27 @@ public class TeamController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseStruct<>("ok", ""));
     }
 
-    @GetMapping( value = "/list/{competitionId}")
-    @ResponseBody
-    @Valid
-    public ResponseEntity<ResponseStruct<CompetitionTeamInfoDto>> getTeamInfo(@Digits(integer = 10, fraction = 0)
-                                                                                  @Positive
-                                                                                  @RequestParam
-                                                                                      Integer competitionId) {
-//        competitionTeamService.list(new )
-    }
+//    @GetMapping( value = "/list/{competitionId}")
+//    @ResponseBody
+//    @Valid
+//    public ResponseEntity<ResponseStruct<CompetitionTeamInfoDto>> getTeamInfo(@Digits(integer = 10, fraction = 0)
+//                                                                                  @Positive
+//                                                                                  @RequestParam
+//                                                                                      Integer competitionId) {
+//        List<CompetitionTeam> competitionTeamList =
+//                competitionTeamService.list(new QueryWrapper<CompetitionTeam>().eq(CompetitionTeam.COL_COMPETITION_ID,
+//                competitionId));
+//        List<Integer> workIdList = new LinkedList<>();
+//        List<Integer> teamIdList = new LinkedList<>();
+//        for (CompetitionTeam competitionTeam : competitionTeamList) {
+//            workIdList.add(competitionTeam.getWorkId());
+//            teamIdList.add(competitionTeam.getId());
+//        }
+//        List<TeamStu> teamStuList = teamStuService.list(new QueryWrapper<TeamStu>().in(TeamStu.COL_TEAM_ID,
+//                teamIdList));
+//        List<TeamTea> teamTeaList = teamTeaService.list(new QueryWrapper<TeamTea>().in(TeamTea.COL_TEAM_ID,
+//                teamIdList));
+//
+//    }
 
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class Tokens implements Serializable {
 
-    private Integer id;
+    private String uuid;
 
     private Date createdAt;
 
