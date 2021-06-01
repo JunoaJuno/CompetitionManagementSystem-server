@@ -31,6 +31,7 @@ dependencies {
     implementation 'com.alibaba:druid-spring-boot-starter:1.2.6'
     implementation 'com.alibaba:fastjson:1.2.76'
     implementation 'com.auth0:java-jwt:3.10.2'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.57'
     implementation 'org.apache.httpcomponents:fluent-hc:4.5.13'
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'

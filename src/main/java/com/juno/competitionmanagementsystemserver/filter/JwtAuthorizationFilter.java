@@ -30,18 +30,13 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         System.out.println("auth:" + request.getRequestURI());
         final String header = "Authorization";
-//        @Valid
-//        @NotBlank(message = "请求头错误")
-//        @Size(min = 9, message = "token参数错误")
-//        @Pattern(regexp = "^(Bearer ).*")
         String requestTokenHeader = request.getHeader(header);
         if (requestTokenHeader != null) {
             String jwtToken = requestTokenHeader.substring(7);
             try {
                 DecodedJWT payload = JwtUtils.verifyToken(jwtToken);
                 if (payload != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                    AuthUserDetails userDetails =
-                            this.userDetailsService.loadUserByUsername(String.valueOf(payload.getClaim("userId").asInt()));
+                    AuthUserDetails userDetails = this.userDetailsService.loadUserByUsername(payload.getPayload());
                     userDetails.setExpiresAt(payload.getExpiresAt());
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(userDetails, payload, userDetails.getAuthorities());

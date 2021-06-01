@@ -39,12 +39,24 @@ public class JwtUtils {
      *
      * @param {tokenPayload} payload
      */
-    public static String getToken(User user, Tokens token) {
+    public static String getToken(User user) {
         return JWT.create()
                 .withClaim("userId", user.getId())
-                .withClaim("tokenId", token.getId())
                 .withClaim("role", user.getManageId())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 24 * 14))
+                .sign(Algorithm.HMAC256("99bd68c7-1da2-4cfc-809b-d1661e96579d"));
+    }
+
+    /**
+     * 创建 PreToken 串
+     *
+     * @param {tokenPayload} payload
+     */
+    public static String getPreToken(User user) {
+        return JWT.create()
+                .withClaim("userId", user.getId())
+                .withClaim("isPreLogin", "true")
+                .withExpiresAt(new Date(System.currentTimeMillis() + 3600000))
                 .sign(Algorithm.HMAC256("99bd68c7-1da2-4cfc-809b-d1661e96579d"));
     }
 

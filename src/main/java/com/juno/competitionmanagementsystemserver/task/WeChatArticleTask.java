@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.juno.competitionmanagementsystemserver.config.WxConfig;
 import com.juno.competitionmanagementsystemserver.dto.ArticleDto;
 import com.juno.competitionmanagementsystemserver.dto.ArticleListDto;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.http.Consts;
 import org.apache.http.client.fluent.Content;
 import org.apache.http.client.fluent.Request;
@@ -16,14 +18,17 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import java.util.logging.Logger;
 
 @Component
 @EnableScheduling
 @EnableAsync
+@Slf4j
 public class WeChatArticleTask {
 
     private final WxConfig wxConfig;
@@ -38,7 +43,7 @@ public class WeChatArticleTask {
 
 
     @Async
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 600000)
     public void getArticleTask() {
         String accessToken = "";
         Integer newsCount = 0;
@@ -47,11 +52,16 @@ public class WeChatArticleTask {
                     "="+wxConfig.getOfficialAccounts().getAppid()+"&secret="+wxConfig.getOfficialAccounts().getSecret())
                     .execute().returnContent();
             JSONObject resultJson = JSON.parseObject(content.asString(Consts.UTF_8));
-            accessToken = resultJson.getString("access_token");
+            if (resultJson.getString("errmsg") != null) {
+                log.error(resultJson.getString("errmsg"));
+            } else if (resultJson.getString("access_token") != null) {
+                accessToken = resultJson.getString("access_token");
+            }
+
         } catch (IOException e) {
             System.out.println(e);
         }
-
+        Assert.notNull(accessToken,"token获取失败");
         try {
             Content content = Request.Get("https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token" +
                     "="+ accessToken)
@@ -61,6 +71,7 @@ public class WeChatArticleTask {
         } catch (IOException e) {
             System.out.println(e);
         }
+        Assert.notNull(newsCount, "获取数据为空");
         List<ArticleDto> articleDtoList = new ArrayList<>();
         for (int i = 0; i < newsCount; i+=20) {
             try {
